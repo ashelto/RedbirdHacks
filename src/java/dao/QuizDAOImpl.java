@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import model.Answer;
 import model.Question;
 import model.Quiz;
 
@@ -83,12 +84,20 @@ public class QuizDAOImpl implements QuizDAO {
                 ResultSet questionRS = questionStmt.executeQuery();
                 int i = 0; // question index counter
                 Question question = new Question();
+                PreparedStatement answerStmt;
+                ResultSet answerRS;
                 while (questionRS.next()) {
                     question.setQuestionId(questionRS.getInt(1));
                     question.setQuestion(questionRS.getString(2));
-                    question.setQuestionType(questionRS.getString(3));                    
+                    question.setQuestionType(questionRS.getString(3));
+                    answerStmt = DBConn.prepareStatement("SELECT * FROM Answers where questionID=?");
+                    answerStmt.setInt(1, question.getQuestionId());
+                    answerRS = answerStmt.executeQuery();
+                        while(answerRS.next()) {
+                            question.getAnswers().add(new Answer(answerRS.getInt(1), answerRS.getString(2), answerRS.getBoolean(3)));
+                        }
+                    quiz.getQuestionSet().add(question);
                 }
-                
             }
             
             DBConn.close();

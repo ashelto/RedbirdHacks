@@ -20,6 +20,14 @@ public class Question
 
     public Question() {
     }
+
+    public ArrayList<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(ArrayList<Answer> answers) {
+        this.answers = answers;
+    }
      
     /**
      * @return the questionId
