@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Multiple Choice</title>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
+        <link href="signin.css" rel="stylesheet"></link>
+    </h:head>
+    <h:body>
+        <div class ="container">
+            <h:form class = "form-signin">
+                <h:outputText value = #{takeQuizController.questionModel.question}></h:outputText>
+                <br/>
+                <h:inputText value = #{takeQuizController.userResponse}></h:inputText>
+                <h:outputText value="#{loginController.response}" style="color:#ff0000"/>
+                <h:commandButton value="Submit" class="btn btn-primary btn-block" 
+                                 id="submit" action="#{takeQuizController.nextQuestion()}" />
+            </h:form>
+        </div>
+    </h:body>
+</html>
+

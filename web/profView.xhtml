@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui">
     <f:event listener="#{loginController.isAdmin}" type="preRenderView" />
     <h:head>
-        <title>Login Success</title>
+        <title>Professor Login</title>
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
     </h:head>
 
@@ -44,7 +44,11 @@
                     </div>
                 </div>
                 <br/>
-                <h3>Assignments</h3>
+                <h3>Create a new assignment</h3>
+                 <p:panelGrid columns="2" layout="grid">            
+                     <h:commandButton value="Create Assignment(not active)" action="#{loginController.logout()}"></h:commandButton>
+                </p:panelGrid>
+                <h3>Modify existing assignments</h3>
                 <p:panelGrid columns="2" layout="grid">            
                     <h:outputText value="Content" /> 
                     <h:outputText value="Content" /> 
@@ -62,4 +66,6 @@
         </div>
     </h:body>
 </html>
+
+
 
