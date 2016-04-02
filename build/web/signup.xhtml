@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Sign-up</title>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
+        <link href="signin.css" rel="stylesheet"></link>
+    </h:head>
+    <h:body>
+        <div class ="container">
+            <h:form class = "form-signin">
+                <!--username,first,last,password,email,securityQ,securityA-->
+                <h3 class="form-signin-heading">Sign up here</h3>
+                First Name: <br/><h:inputText id="firstname" class="form-control" value="#{loginController.theModel.firstName}" required="true">
+                                              <f:validateLength minimum="2" maximum="25" /> 
+                                              </h:inputText><br/>
+                Last Name: <br/><h:inputText id="lastname" class="form-control" value="#{loginController.theModel.lastName}" required="true">
+                                              <f:validateLength minimum="2" maximum="25" /> 
+                                              </h:inputText><br/>
+                Email: <br/><h:inputText id="email" class="form-control" value="#{loginController.theModel.email}" required="true"/><br/>
+                Username: <br/><h:inputText id="username" class="form-control" value="#{loginController.theModel.username}" required="true"/><br/>
+                Password: <br/><h:inputSecret id="password" class="form-control" value="#{loginController.theModel.password}" required="true" /><br/>
+                Confirm Password: <br/><h:inputSecret id="confirmpassword" class="form-control" value="#{loginController.confirmPassword}" required="true"/><br/>
+                Role: <br/><h:selectOneMenu id="role" class="form-control" value="#{loginController.theModel.role}"  required="true">
+                    <f:selectItems value="#{loginController.roles}"/></h:selectOneMenu><br/>
+                <h:commandButton value="Sign up" class="btn btn-primary btn-block" id="loginbutton" action="#{loginController.processSignup()}" />
+                <h:commandButton id="back" value="Back" class="btn btn-warning btn-block" action="index.xhtml"/>
+                <h:outputText value="#{loginController.response}" style="color:#ff0000"/>
+                </h:form>
+        </div>
+    </h:body>
+</html>
+

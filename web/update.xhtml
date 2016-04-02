@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:event listener="#{loginController.isAdmin}" type="preRenderView" />
+    <h:head>
+        <title>Update user info</title>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
+        <link href="signin.css" rel="stylesheet"></link>
+    </h:head>
+    
+    <h:body>
+        <h:form class = "form-signin">
+            <h3 class="form-signin-heading">Update #{loginController.theModel.username} account info</h3>
+                New First Name: <br/><h:inputText id="firstname" class="form-control" value="#{loginController.theModel.firstName}"/><br/>
+                New Last Name: <br/><h:inputText id="lastname" class="form-control" value="#{loginController.theModel.lastName}"/><br/>
+                New Email: <br/><h:inputText id="email" class="form-control" value="#{loginController.theModel.email}"/><br/>
+                Old Password: <br/><h:inputSecret id="oldPassword" class="form-control" value="#{loginController.oldPw}"/><br/>
+                New Password: <br/><h:inputSecret id="password" class="form-control" value="#{loginController.newPw}" required="true"/><br/>
+                Security Question: <br/><h:inputText id="secq" class="form-control" value="#{loginController.theModel.securityQuestion}"/><br/>
+                Answer: <br/><h:inputText id="seca" class="form-control" value="#{loginController.theModel.securityAnswer}"/><br/>
+                <h:commandButton value="Update" class="btn btn-primary btn-block" action="#{loginController.executeUpdate()}" />
+                <h:commandButton id="back" value="Back" class="btn btn-warning btn-block" action="index.xhtml"/>
+                <h:outputText value="#{updateController.response}" style="color:#ff0000"/>
+            </h:form>
+    </h:body>
+</html>
+
