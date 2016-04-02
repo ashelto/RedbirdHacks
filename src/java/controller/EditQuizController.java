@@ -5,12 +5,35 @@
  */
 package controller;
 
+import dao.QuizDAO;
+import dao.QuizDAOImpl;
+import javax.faces.bean.ManagedBean;
 import model.Quiz;
 
 /**
  *
  * @author Tom
  */
+@ManagedBean
 public class EditQuizController {
     private Quiz quiz;
+    
+    public EditQuizController() {
+        //QuizDAO quizDAO = new QuizDAOImpl();
+        //this.quiz = quizDAO.getQuizByID(8);        
+    }
+
+    public Quiz getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
+    }
+    
+    public void test() {
+        QuizDAO quizDAO = new QuizDAOImpl();
+        this.quiz = quizDAO.getQuizByID(8);
+        System.out.println(quiz.getQuestionSet().size());
+    }
 }

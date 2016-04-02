@@ -82,11 +82,11 @@ public class QuizDAOImpl implements QuizDAO {
                 PreparedStatement questionStmt = DBConn.prepareStatement(sqlStr);
                 questionStmt.setInt(1, quizID);
                 ResultSet questionRS = questionStmt.executeQuery();
-                int i = 0; // question index counter
                 Question question = new Question();
                 PreparedStatement answerStmt;
                 ResultSet answerRS;
                 while (questionRS.next()) {
+                    question = new Question();
                     question.setQuestionId(questionRS.getInt(1));
                     question.setQuestion(questionRS.getString(2));
                     question.setQuestionType(questionRS.getString(3));
@@ -96,6 +96,7 @@ public class QuizDAOImpl implements QuizDAO {
                         while(answerRS.next()) {
                             question.getAnswers().add(new Answer(answerRS.getInt(1), answerRS.getString(2), answerRS.getBoolean(3)));
                         }
+                    System.out.println(question.getQuestion());
                     quiz.getQuestionSet().add(question);
                 }
             }

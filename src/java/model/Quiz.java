@@ -18,7 +18,7 @@ public class Quiz
     private String name;
     private String subject; 
     private int questions; 
-    private ArrayList <Question> questionSet;
+    private ArrayList <Question> questionSet = new ArrayList<Question>();
 
     public Quiz() {
     }

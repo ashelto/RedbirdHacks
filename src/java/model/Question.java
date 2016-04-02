@@ -16,7 +16,7 @@ public class Question
     private int questionId;
     private String question;
     private String questionType;
-    private ArrayList<Answer> answers;
+    private ArrayList<Answer> answers = new ArrayList<Answer>();
 
     public Question() {
     }
@@ -69,14 +69,5 @@ public class Question
      */
     public void setQuestionType(String questionType) {
         this.questionType = questionType;
-    }
-
-    public ArrayList<Answer> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(ArrayList<Answer> answers) {
-        this.answers = answers;
-    }
-    
+    }    
 }
