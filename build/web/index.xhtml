@@ -12,14 +12,13 @@
     <h:body>
         <div class = "container">
             <h:form class = "form-signin">
-                <h3 class="form-signin-heading">John Popilek and Steve Sullivan</h3>
+                <h3 class="form-signin-heading">Please Log in</h3>
                 <h3 class="form-signin-heading">Login application for lab 3</h3>
                 Username: <br/><h:inputText id="username" class="form-control" value="#{loginController.theModel.username}"/><br/>
                 Password: <br/><h:inputSecret id="password" class="form-control" value="#{loginController.theModel.password}" /><br/>
                 <h:commandButton value="Sign in" class="btn btn-lg btn-primary btn-block" id="loginbutton" action="#{loginController.processLogin()}" />
                 <h:commandButton value="Sign up" class="btn btn-lg btn-warning btn-block" id="signup" action="signup.xhtml" />
                 <h:outputText value="#{loginController.response}" style="color:#ff0000"/>
-                <h:commandButton value="Create user" class="btn btn-lg btn-primary btn-block" id="createFakeUser" action="#{loginController.createFakeUser()}" />
             </h:form>
         </div>
     </h:body>
