@@ -2,21 +2,66 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <f:event listener="#{loginController.isAdmin}" type="preRenderView" />
     <h:head>
         <title>Login Success</title>
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
     </h:head>
-    
+
     <h:body>
         <div class = "container"> 
-        <h:form>
-            Thanks for logging in #{loginController.theModel.username} with the email of: #{loginController.theModel.email}<br/> Your password and security answer were omitted
-            from this page due to security concerns.
-        <h:commandButton id="back" value="Back" action="index.xhtml"/>
-        <h:commandButton id="update" value="Update" action="update.xhtml"/>
-    </h:form>
+            <p:panelGrid columns="1">
+                <f:facet name="header">
+                    <h:outputText value="Welcome to Learners Edge, #{loginController.theModel.firstName}." /> 
+                </f:facet>
+
+            </p:panelGrid>
+            <h:form>
+                <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                    data-target=".navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span> <span
+                                    class="icon-bar"></span> <span class="icon-bar"></span> <span
+                                    class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <div class="collapse navbar-collapse">
+                            <ul class="nav navbar-nav">
+                                <li><a href="response.xhtml">Home</a></li>
+                                <li><a href="">Posts</a></li>
+                                <li> 
+                                    <h:form class="form-inline pull-xs-right">
+                                        <h:commandLink value="Logout" action="#{loginController.logout()}"></h:commandLink>
+                                    </h:form> 
+                                </li>
+                            </ul>
+                        </div>
+                        <!--/.nav-collapse -->
+                    </div>
+                </div>
+                <br/>
+                <h3>Assignments</h3>
+                <p:panelGrid columns="2" layout="grid">            
+                    <h:outputText value="Content" /> 
+                    <h:outputText value="Content" /> 
+                    <h:outputText value="Content" /> 
+
+                    <h:outputText value="Content" /> 
+                    <h:outputText value="Content" /> 
+                    <h:outputText value="Content" /> 
+
+                    <h:outputText value="Content" /> 
+                    <h:outputText value="Content" /> 
+                    <h:outputText value="Content" /> 
+                </p:panelGrid>
+
+                <h:commandButton id="back" value="Back" action="index.xhtml"/>
+                <h:commandButton id="update" value="Update" action="update.xhtml"/>
+            </h:form>
         </div>
     </h:body>
 </html>
