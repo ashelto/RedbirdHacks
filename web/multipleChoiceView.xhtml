@@ -10,7 +10,7 @@
     <h:body>
         <div class ="container">
             <h:form class = "form-signin">
-                <h:outputText value = #{takeQuizController.questionModel.question}></h:outputText>
+                <h:outputText value = #{takeQuizController.quizModel.question}></h:outputText>
                 <br/>
                 <h:commandButton value = "#{takeQuizController.answerModel.answerOne}" action = "#{takeQuizController.evaluateAnswer()}"></h:commandButton>
                 <h:commandButton value = "#{takeQuizController.answerModel.answerTwo}" action = "#{takeQuizController.evaluateAnswer()}"></h:commandButton>
