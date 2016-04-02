@@ -7,7 +7,6 @@ package controller;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import model.Quiz;
 
 /**
  *
@@ -20,33 +19,7 @@ public class TakeQuizController {
     /**
      * Creates a new instance of TakeQuizController
      */
-    Quiz quizModel;
-    String userResponse;
-    
     public TakeQuizController() {
-        
-       quizModel = new Quiz(); 
     }
-
-    public Quiz getQuizModel() {
-        return quizModel;
-    }
-
-    public void setQuizModel(Quiz quizModel) {
-        this.quizModel = quizModel;
-    }
-
-    public String getUserResponse() {
-        return userResponse;
-    }
-
-    public void setUserResponse(String userResponse) {
-        this.userResponse = userResponse;
-    }
-//    public boolean validateAnswer()
-//    {
-//        boolean correct;
-//        if(userResponse.equals(quizModel.))
-//    }
     
 }
