@@ -41,8 +41,8 @@ public class LoginController {
 
     public void setRoles(String[] roles) {
         this.roles = roles;
-    }    
-    
+    }
+
     public User getTheModel() {
         return theModel;
     }
@@ -131,12 +131,16 @@ public class LoginController {
             } else {
                 loggedIn = true;
                 response = "";
-                return "response.xhtml";
+                if (theModel.getRole().equals("Student")) {
+                    return "response.xhtml";
+                } else if (theModel.getRole().equals("Professor")) {
+                    return "profView.xhtml";
+                }
             }
         } else {
             return "";
         }
-
+        return "";
     }
 
     public String processSignup() {
@@ -153,9 +157,11 @@ public class LoginController {
                 response = "";
                 UserDAOImpl impl = new UserDAOImpl();
                 if (impl.createUser(theModel) == 1) {
-//                    SignupEmail se = new SignupEmail();
-//                    se.sendEmail(theModel.getEmail(), "jpopile@ilstu.edu");
-                    return "response.xhtml";
+                    if (theModel.getRole().equals("Student")) {
+                        return "response.xhtml";
+                    } else if (theModel.getRole().equals("Professor")) {
+                        return "profView.xhtml";
+                    }
                 } else {
                     response = "insert user failed.";
                     return "";
@@ -209,7 +215,7 @@ public class LoginController {
         }
         return navi;
     }
-    
+
     //String username, String firstName, String lastName, String password, String email, int role
     public void createFakeUser() {
         User fakeUser = new User("Admin", "Joe", "Momma", "password", "email@mail.com", "adminrole");
