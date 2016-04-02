@@ -62,4 +62,13 @@ public class Question
     public void setQuestionType(String questionType) {
         this.questionType = questionType;
     }
+
+    public ArrayList<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(ArrayList<Answer> answers) {
+        this.answers = answers;
+    }
+    
 }
