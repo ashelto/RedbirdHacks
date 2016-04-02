@@ -43,11 +43,11 @@ public class QuestionDAOImpl implements QuestionDAO {
             String sqlStr = "INSERT INTO testQuestions (questionId, question, questionType, possibleAnswers, correctAnswer)"
                     + "VALUES (?,?,?,?,?,?)";
             PreparedStatement stmt = DBConn.prepareStatement(sqlStr);
-            stmt.setString(1, aQuestion.getQuestionId());
+            stmt.setInt(1, aQuestion.getQuestionId());
             stmt.setString(2, aQuestion.getQuestion());
             stmt.setString(3, aQuestion.getQuestionType());
-            stmt.setString(4, aQuestion.getPossibleAnswers());
-            stmt.setString(5, aQuestion.getCorrectAnswer());
+            //stmt.setString(4, aQuestion.getPossibleAnswers()); // having these two commented out will cause errors!
+            //stmt.setString(5, aQuestion.getCorrectAnswer());
 
             rowCount = stmt.executeUpdate();
             DBConn.close();

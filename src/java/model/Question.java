@@ -5,43 +5,33 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author it3530218
  */
 public class Question 
 {
-    private String questionId;
+    private int questionId;
     private String question;
     private String questionType;
-    private String possibleAnswers;
-    private String correctAnswer; 
+    private ArrayList<Answer> answers;
 
-    public Question() 
-    {
-        
+    public Question() {
     }
-
-    public Question(String questionId,String question, String questionType, String possibleAnswers, String correctAnswer) 
-    {
-        this.questionId = questionId;
-        this.question = question;
-        this.questionType = questionType;
-        this.possibleAnswers = possibleAnswers;
-        this.correctAnswer = correctAnswer;
-    }
-    
+     
     /**
      * @return the questionId
      */
-    public String getQuestionId() {
+    public int getQuestionId() {
         return questionId;
     }
 
     /**
      * @param questionId the questionId to set
      */
-    public void setQuestionId(String questionId) {
+    public void setQuestionId(int questionId) {
         this.questionId = questionId;
     }
 
@@ -72,36 +62,4 @@ public class Question
     public void setQuestionType(String questionType) {
         this.questionType = questionType;
     }
-
-    /**
-     * @return the possibleAnswers
-     */
-    public String getPossibleAnswers() {
-        return possibleAnswers;
-    }
-
-    /**
-     * @param possibleAnswers the possibleAnswers to set
-     */
-    public void setPossibleAnswers(String possibleAnswers) {
-        this.possibleAnswers = possibleAnswers;
-    }
-
-    /**
-     * @return the correctAnswer
-     */
-    public String getCorrectAnswer() {
-        return correctAnswer;
-    }
-
-    /**
-     * @param correctAnswer the correctAnswer to set
-     */
-    public void setCorrectAnswer(String correctAnswer) {
-        this.correctAnswer = correctAnswer;
-    }
-    
-    
-
-
 }
