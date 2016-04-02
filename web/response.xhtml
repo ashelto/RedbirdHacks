@@ -12,8 +12,7 @@
     <h:body>
         <div class = "container"> 
         <h:form>
-            Thanks for logging in #{loginController.theModel.username} with the email of: #{loginController.theModel.email}<br/>
-            your security question was #{loginController.theModel.securityQuestion}. Your password and security answer were omitted
+            Thanks for logging in #{loginController.theModel.username} with the email of: #{loginController.theModel.email}<br/> Your password and security answer were omitted
             from this page due to security concerns.
         <h:commandButton id="back" value="Back" action="index.xhtml"/>
         <h:commandButton id="update" value="Update" action="update.xhtml"/>

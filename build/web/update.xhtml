@@ -18,8 +18,6 @@
                 New Email: <br/><h:inputText id="email" class="form-control" value="#{loginController.theModel.email}"/><br/>
                 Old Password: <br/><h:inputSecret id="oldPassword" class="form-control" value="#{loginController.oldPw}"/><br/>
                 New Password: <br/><h:inputSecret id="password" class="form-control" value="#{loginController.newPw}" required="true"/><br/>
-                Security Question: <br/><h:inputText id="secq" class="form-control" value="#{loginController.theModel.securityQuestion}"/><br/>
-                Answer: <br/><h:inputText id="seca" class="form-control" value="#{loginController.theModel.securityAnswer}"/><br/>
                 <h:commandButton value="Update" class="btn btn-primary btn-block" action="#{loginController.executeUpdate()}" />
                 <h:commandButton id="back" value="Back" class="btn btn-warning btn-block" action="index.xhtml"/>
                 <h:outputText value="#{updateController.response}" style="color:#ff0000"/>
