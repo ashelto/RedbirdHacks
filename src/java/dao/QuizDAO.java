@@ -16,4 +16,5 @@ public interface QuizDAO {
     public int createQuiz(Quiz quiz);
     public Quiz getQuizByID(int quizID);
     public ArrayList<Quiz> getAllQuizzes();
+    public ArrayList<Quiz> getAllProfQuizzes(String profUsername);
 }
