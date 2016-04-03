@@ -5,9 +5,12 @@
  */
 package controller;
 
+import dao.QuizDAO;
+import dao.QuizDAOImpl;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import model.Question;
+import model.Quiz;
 import model.User;
 
 /**
@@ -76,7 +79,10 @@ public class questionController
         this.type = type;
     }
     
-    
+     public void prerenderSetup() {
+        QuizDAO quizDAO = new QuizDAOImpl();
+        quizModel = quizDAO.getQuizByID(quizModel.getQuizId());
+    }
     
     public String testMyApp()
     {
@@ -161,6 +167,12 @@ public class questionController
      */
     public void setRenderShort(String renderShort) {
         this.renderShort = renderShort;
+    }
+    
+    public String getQuizId()
+    {
+        QuizDAOImpl aDAOImpl = new QuizDAOImpl();
+        Quiz aQuiz = aDAOImpl.getQuizByID(quizID);
     }
     
     public String render()
