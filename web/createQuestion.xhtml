@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <title>Sign-up</title>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
+        <link href="signin.css" rel="stylesheet"></link>
+    </h:head>
+    <h:body>
+        <div class ="container">
+            <h:form class = "create-question">
+                type <br/><h:selectOneMenu id="type" class="form-control newclass" value="#{questionController.question.questionType}" onchange ="myFunction(this)"  required="true">
+                    <f:selectItems value="#{questionController.type}"/>
+                    <f:ajax event="change" render = "create-fill createtf create-short create-mc" />
+                </h:selectOneMenu><br/>
+                <h:outputText id="mc-question-text" class ="mc" value="Please enter question: &lt;br/&gt;" style="color:#ff0000; display:none" escape= "false"/>
+                
+                <h:inputText id="mc-question" class ="mc" value="#{questionController.question.question}" style="color:#ff0000; display:none"/>
+                
+                <h:outputText id="test10" class ="mc" value="&lt;br/&gt; " style="color:#ff0000; display:none" escape= "false"/>
+                
+                <h:outputText id="test5" class ="mc" value="&lt;br/&gt; " style="color:#ff0000; display:none" escape= "false"/>
+                <h:outputText id="mc-ans1-text" class ="mc" value="Answer A:" style="color:#ff0000; display:none" escape= "false"/>
+                <h:inputText id="mc-ans1-in" class ="mc" value="Answer here" style="color:#ff0000; display:none"/><h:outputText id="test2" class ="mc" value="&lt;br/&gt; " style="color:#ff0000; display:none" escape= "false"/>
+                <h:outputText id="mc-ans2-text" class ="mc" value="Answer B: " style="color:#ff0000; display:none" escape= "false"/>
+                <h:inputText id="mc-ans2-in" class ="mc" value="Answer here" style="color:#ff0000; display:none"/>  <h:outputText id="test1" class ="mc" value="&lt;br/&gt; " style="color:#ff0000; display:none" escape= "false"/>
+                <h:outputText id="mc-ans3-text" class ="mc" value="Answer C: " style="color:#ff0000; display:none" escape= "false"/>
+                <h:inputText id="mc-ans3-in" class ="mc" value="Answer here" style="color:#ff0000; display:none"/><h:outputText id="test3" class ="mc" value="&lt;br/&gt; " style="color:#ff0000; display:none" escape= "false"/>
+                <h:outputText id="mc-ans4-text" class ="mc" value="Answer D: " style="color:#ff0000; display:none" escape= "false"/>
+                <h:inputText id="mc-ans4-in" class ="mc" value="Answer here" style="color:#ff0000; display:none"/><h:outputText id="test4" class ="mc" value="&lt;br/&gt; " style="color:#ff0000; display:none" escape= "false"/>
+                <h:outputText id="test13" class ="mc" value="&lt;br/&gt; " style="color:#ff0000; display:none" escape= "false"/>
+                <h:outputText id="mc-correct-textt" class ="mc" value="Correct Answer" style="color:#ff0000; display:none"  escape= "false"/>
+                <h:outputText id="test12" class ="mc" value="&lt;br/&gt; " style="color:#ff0000; display:none" escape= "false"/>
+                <h:selectOneMenu class ="mc-select" value="#{questionController.question.correctAnswer}" style="display:none">
+                <f:selectItem  class = "mc" itemValue="A" itemLabel="A" />
+                <f:selectItem  class = "mc" itemValue="B" itemLabel="B" />
+                <f:selectItem  class = "mc" itemValue="C" itemLabel="C" />
+                <f:selectItem  class = "mc" itemValue="D" itemLabel="D" />
+                </h:selectOneMenu>
+                
+
+                <h:outputText id="tf-text" class ="tf" value="Please enter questison: " style="color:#ff0000; display:none"/>
+                
+                <h:outputText id="test6" class ="tf" value="&lt;br/&gt; " style="color:#ff0000; display:none" escape= "false"/>
+                <h:inputText id="tf-question" class ="tf" value="#{questionController.question.question}" style="color:#ff0000; display:none"/>
+                
+                <h:outputText id="test9" class ="tf" value="&lt;br/&gt; " style="color:#ff0000; display:none" escape= "false"/>
+                <h:outputText id="test7" class ="tf" value="&lt;br/&gt; " style="color:#ff0000; display:none" escape= "false"/>
+                <h:outputText id="tf-answer-text" class ="tf" value="Correct answer: " style="color:#ff0000; display:none" escape= "false"/>
+               <h:selectOneMenu class ="tf" value="#{questionController.question.correctAnswer}" style="display:none">
+                <f:selectItem  class = "tf" itemValue="true" itemLabel="True" />
+                <f:selectItem  class = "tf" itemValue="false" itemLabel="False" />
+                </h:selectOneMenu>
+                
+                
+                
+                
+                <h:outputText id="fill-question-text" class ="fill" value="Please Enter Question: " style="color:#ff0000; display:none"/>
+                <h:inputText id="fill" class ="fill" value="#{questionController.question.question}" style="color:#ff0000; display:none"/><br/>
+                <h:outputText id="fill-answer-text" class ="fill" value="Please Enter Correct Answer " style="color:#ff0000; display:none"/>
+                <h:inputText id="fill-answer" class ="fill" value="#{questionController.question.correctAnswer}" style="color:#ff0000; display:none"/>
+                
+                
+                <h:outputText id="select" class ="select" value="Please select a question" style="color:#ff0000; display:none"/>
+                </h:form>
+        </div>
+    </h:body>
+    <script>
+        function myFunction(form)
+        {
+           var passwordConfirm = $(".newclass").val()
+           if (passwordConfirm == "Multiple Choice")
+           {
+               $(".mc").show();
+               $(".tf").hide();
+               $(".fill").hide();
+               $(".select").hide();
+               $(".mc-select").show();
+           }
+           if (passwordConfirm == "True/False")
+           {
+               $(".mc").hide();
+               $(".tf").show();
+               $(".fill").hide();
+               $(".select").hide();
+               $(".mc-select").hide();
+
+           }
+           if (passwordConfirm == "Fill in the blank")
+           {
+               $(".mc").hide();
+               $(".tf").hide();
+               $(".fill").show();
+               $(".select").hide();
+               $(".mc-select").hide();
+
+           }
+           
+           if (passwordConfirm == "Select Question")
+           {
+               $(".mc").hide();
+               $(".tf").hide();
+               $(".fill").hide();
+               $(".select").show();
+               $(".mc-select").hide();
+
+           }
+        }
+        
+    </script>
+</html>
+
