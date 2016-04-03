@@ -12,8 +12,8 @@
     <h:body>
         <div class = "container">
             <h:form class = "form-signin">
+                <img src ="./logo.png"></img>
                 <h3 class="form-signin-heading">Please Log in</h3>
-                <h3 class="form-signin-heading">Login application for lab 3</h3>
                 Username: <br/><h:inputText id="username" class="form-control" value="#{loginController.theModel.username}"/><br/>
                 Password: <br/><h:inputSecret id="password" class="form-control" value="#{loginController.theModel.password}" /><br/>
                 <h:commandButton value="Sign in" class="btn btn-lg btn-primary btn-block" id="loginbutton" action="#{loginController.processLogin()}" />
