@@ -17,7 +17,6 @@ public class Question
     private String questionTopic;
     private String questionType;
     private String questionText;
-    private ArrayList<Answer> answers = new ArrayList();
 
     public Question() {
     }
@@ -77,12 +76,7 @@ public class Question
     public void setQuestionText(String questionText) {
         this.questionText = questionText;
     }
+    
+    
 
-    public ArrayList<Answer> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(ArrayList<Answer> answers) {
-        this.answers = answers;
-    }
 }

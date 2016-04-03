@@ -103,6 +103,7 @@ public class QuizDAOImpl implements QuizDAO {
                         while(answerRS.next()) {
                             question.getAnswers().add(new Answer(answerRS.getInt(1), answerRS.getString(2), answerRS.getBoolean(3)));
                         }
+                    System.out.println(question.getQuestion());
                     quiz.getQuestionSet().add(question);
                 }
             }
