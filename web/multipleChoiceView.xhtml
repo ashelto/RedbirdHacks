@@ -10,14 +10,18 @@
     <h:body>
         <div class ="container">
             <h:form class = "form-signin">
-                <h:outputText value = #{takeQuizController.questionModel.question}></h:outputText>
+                <h:outputText value = "#{takeQuizController.getQuestion(takeQuizController.index).getQuestion()}"></h:outputText>
                 <br/>
-                <h:commandButton value = "#{takeQuizController.answerModel.answerOne}" action = "#{takeQuizController.evaluateAnswer()}"></h:commandButton>
-                <h:commandButton value = "#{takeQuizController.answerModel.answerTwo}" action = "#{takeQuizController.evaluateAnswer()}"></h:commandButton>
-                <h:commandButton value = "#{takeQuizController.answerModel.answerThree}" action = "#{takeQuizController.evaluateAnswer()}"></h:commandButton>
-                <h:commandButton value = "#{takeQuizController.answerModel.answerFour}" action = "#{takeQuizController.evaluateAnswer()}"></h:commandButton>
-                <h:commandButton value="Submit" class="btn btn-primary btn-block" id="submit" action="#{takeQuizController.nextQuestion()}" />
-                <h:outputText value="#{loginController.response}" style="color:#ff0000"/>
+                <h:commandButton id = "ans1" value = "A" action = "#{takeQuizController.evaluateAnswer(0)}"></h:commandButton>
+                <h:outputText value = "#{takeQuizController.getQuestion(takeQuizController.index).getAnswers().get(0).getAnswer()}"></h:outputText><br/>
+                <h:commandButton id = "ans2" value = "B" action = "#{takeQuizController.evaluateAnswer(1)}"></h:commandButton>
+                <h:outputText value = "#{takeQuizController.getQuestion(takeQuizController.index).getAnswers().get(1).getAnswer()}"></h:outputText><br/>
+                <h:commandButton id = "ans3" value = "C" action = "#{takeQuizController.evaluateAnswer(2)}"></h:commandButton>
+                <h:outputText value = "#{takeQuizController.getQuestion(takeQuizController.index).getAnswers().get(2).getAnswer()}"></h:outputText><br/>
+                <h:commandButton id = "ans4" value = "D" action = "#{takeQuizController.evaluateAnswer(3)}"></h:commandButton>
+                <h:outputText value = "#{takeQuizController.getQuestion(takeQuizController.index).getAnswers().get(3).getAnswer()}"></h:outputText><br/>
+                <h:commandButton value="Submit" class="btn btn-primary btn-block" id="submit" action="#{takeQuizController.generateIndex()}" />
+                <h:outputText value="#{takeQuizController.output}" style="color:#ff0000"/>
             </h:form>
         </div>
     </h:body>
