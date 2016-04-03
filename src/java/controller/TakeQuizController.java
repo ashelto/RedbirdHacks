@@ -60,7 +60,7 @@ public class TakeQuizController {
         } else if (questionType.equals("TF")) {
             return "/trueFalseView.xhtml";
         } else if (questionType.equals("FITB")) {
-            return "fillinTheBlankView.xhtml"; 
+            return "/fillinTheBlankView.xhtml"; 
         } else {
             System.out.println("ERROR: launchQuiz");
         }

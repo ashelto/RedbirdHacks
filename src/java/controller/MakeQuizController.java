@@ -7,6 +7,8 @@ package controller;
 
 import dao.QuizDAO;
 import dao.QuizDAOImpl;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import model.Quiz;
@@ -46,11 +48,29 @@ public class MakeQuizController {
     public String createQuiz() {
         QuizDAO quizDAO = new QuizDAOImpl();
         quiz.setAuthor(user.getUsername());
-         if (quizDAO.createQuiz(quiz) == 1) {
-             //return "editquiz?quizid=" + id;
+        int newQuizID = quizDAO.createQuiz(quiz);
+         if (newQuizID > 0) {
+             return ("/profView.xhtml?faces-redirect=true");
+         } else {
+            return "";
          }
-         return "";
     }
-    
-    
+
+    public static String encodeURIComponent(String component)   {     
+	String result = null;      
+	
+	try {       
+		result = URLEncoder.encode(component, "UTF-8")   
+			   .replaceAll("\\%28", "(")                          
+			   .replaceAll("\\%29", ")")   		
+			   .replaceAll("\\+", "%20")                          
+			   .replaceAll("\\%27", "'")   			   
+			   .replaceAll("\\%21", "!")
+			   .replaceAll("\\%7E", "~");     
+        } catch (UnsupportedEncodingException e) {       
+		result = component;     
+	}      
+	
+	return result;   
+}  
 }

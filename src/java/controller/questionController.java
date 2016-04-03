@@ -5,9 +5,15 @@
  */
 package controller;
 
+import dao.QuestionDAO;
+import dao.QuestionDAOImpl;
+import dao.QuizDAO;
+import dao.QuizDAOImpl;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import model.Question;
+import model.Quiz;
 import model.User;
 
 /**
@@ -15,25 +21,30 @@ import model.User;
  * @author it3530218
  */
 @ManagedBean
-@SessionScoped
+
 public class questionController 
 {
+    @ManagedProperty(value="#{loginController.theModel}")
     private User theModel;
+    private Quiz quizModel;
     private Question question;
-    private String response = "";
     private String[] type = {"Select Question", "Multiple Choice","True/False","Fill in the blank"};
-    private String renderMC = "false";
-    private String renderFill = "false";
-    private String renderTF = "false";
-    private String renderShort = "false";
-    
 
     public questionController() {
           question = new Question();
+          quizModel = new Quiz();
     }
 
-    
-    
+    public String[] getType() {
+        return type;
+    }
+    /**
+     * @param type the type to set
+     */
+    public void setType(String[] type) {
+        this.type = type;
+    }
+
     /**
      * @return the theModel
      */
@@ -49,6 +60,20 @@ public class questionController
     }
 
     /**
+     * @return the quiz
+     */
+    public Quiz getQuizModel() {
+        return quizModel;
+    }
+
+    /**
+     * @param quizModel the quiz to set
+     */
+    public void setQuizModel(Quiz quizModel) {
+        this.quizModel = quizModel;
+    }
+
+    /**
      * @return the question
      */
     public Question getQuestion() {
@@ -61,170 +86,25 @@ public class questionController
     public void setQuestion(Question question) {
         this.question = question;
     }
-
-    /**
-     * @return the type
-     */
-    public String[] getType() {
-        return type;
-    }
-
-    /**
-     * @param type the type to set
-     */
-    public void setType(String[] type) {
-        this.type = type;
+        
+    public void prerenderSetup() {
+        QuizDAO quizDAO = new QuizDAOImpl();
+        quizModel = quizDAO.getQuizByID(quizModel.getQuizId());
     }
     
-    
-    
-    public String testMyApp()
+    public String createQuestion()
     {
-        String temppppp = "ffffff";
-       if(question.getQuestionType() != null)
-       {
-           response = question.getQuestionType();
-           return "createQuestion.xhtml";
-       }
-       else
-       {
-           response = "failed";
-           return "createQuestion.xhtml";
-       }
-    }
-
-    /**
-     * @return the response
-     */
-    public String getResponse() {
-        return response;
-    }
-
-    /**
-     * @param response the response to set
-     */
-    public void setResponse(String response) {
-        this.response = response;
-    }
-
-    /**
-     * @return the renderMC
-     */
-    public String getRenderMC() {
-        return renderMC;
-    }
-
-    /**
-     * @param renderMC the renderMC to set
-     */
-    public void setRenderMC(String renderMC) {
-        this.renderMC = renderMC;
-    }
-
-    /**
-     * @return the renderFill
-     */
-    public String getRenderFill() {
-        return renderFill;
-    }
-
-    /**
-     * @param renderFill the renderFill to set
-     */
-    public void setRenderFill(String renderFill) {
-        this.renderFill = renderFill;
-    }
-
-    /**
-     * @return the renderTF
-     */
-    public String getRenderTF() {
-        return renderTF;
-    }
-
-    /**
-     * @param renderTF the renderTF to set
-     */
-    public void setRenderTF(String renderTF) {
-        this.renderTF = renderTF;
-    }
-
-    /**
-     * @return the renderShort
-     */
-    public String getRenderShort() {
-        return renderShort;
-    }
-
-    /**
-     * @param renderShort the renderShort to set
-     */
-    public void setRenderShort(String renderShort) {
-        this.renderShort = renderShort;
-    }
-    
-    public String render()
-    {
-        String render = "";
-        if(question.getQuestionType() != null)
+        QuestionDAO aQuestionDAO = new QuestionDAOImpl();
+        int aQuestion = aQuestionDAO.createQuestion(question, quizModel.getQuizId());
+        
+        if(aQuestion ==1)
         {
-            render = question.getQuestionType();
+            return "/createQuestion.xhtml?quizId=" + quizModel.getQuizId();
         }
         else
         {
-            render = "Select Question";
+            return "";
         }
-        if(render.equals("Select Question"))
-        {
-            response = "please select a question type";
-            renderMC = "false";
-            renderTF = "false";
-            renderFill = "false";
-            renderShort = "false";
-            return "createQuestion.xhtml";
-        }
-        if(render.equals("Multiple Choice"))
-        {
-            response = "";
-            renderMC = "true";
-            renderTF = "false";
-            renderFill = "false";
-            renderShort = "false";
-            return "createQuestion.xhtml";
-        }
-        if(render.equals("True/False"))
-        {
-            response = "";
-            renderMC = "false";
-            renderTF = "true";
-            renderFill = "false";
-            renderShort = "false";
-            return "createQuestion.xhtml";
-        }
-        if(render.equals("Fill in the blank"))
-        {
-            
-            response = "";
-            renderMC = "false";
-            renderTF = "false";
-            renderFill = "true";
-            renderShort = "false";
-            return "createQuestion.xhtml";
-        }
-        if(render.equals("Short Answer"))
-        {
-            response = "";
-            renderMC = "false";
-            renderTF = "false";
-            renderFill = "false";
-            renderShort = "true";
-            return "createQuestion.xhtml";
-        }
-        return "createQuestion.xhtml";
     }
-
-
-    
-    
-    
-}
+      
+}     

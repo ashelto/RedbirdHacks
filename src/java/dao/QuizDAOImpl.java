@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import model.Answer;
 import model.Question;
@@ -35,22 +36,27 @@ public class QuizDAOImpl implements QuizDAO {
         }
 
         int rowCount = 0;
+        int newQuizID = 0;
         try {          
             Connection DBConn = DriverManager.getConnection(connStr, user, password);
-
+            
             //username,first,last,password,email,securityQ,securityA
             String sqlStr = "INSERT INTO Quizzes (profUsername, quizTitle) VALUES (?,?)";
-            PreparedStatement stmt = DBConn.prepareStatement(sqlStr);
+            PreparedStatement stmt = DBConn.prepareStatement(sqlStr, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, quiz.getAuthor()); // update to insert professor's username
             stmt.setString(2, quiz.getName());
             rowCount = stmt.executeUpdate();
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()){
+                newQuizID = rs.getInt(1);
+            }
             DBConn.close();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
 
         // if insert is successful, rowCount will be set to 1 (1 row inserted successfully). Else, insert failed.
-        return rowCount;
+        return newQuizID;
     }
 
     @Override
@@ -89,7 +95,7 @@ public class QuizDAOImpl implements QuizDAO {
                 while (questionRS.next()) {
                     question = new Question();
                     question.setQuestionId(questionRS.getInt(1));
-                    question.setQuestion(questionRS.getString(2));
+                    question.setQuestionText(questionRS.getString(2));
                     question.setQuestionType(questionRS.getString(3));
                     answerStmt = DBConn.prepareStatement("SELECT * FROM Answers where questionID=?");
                     answerStmt.setInt(1, question.getQuestionId());
@@ -127,6 +133,44 @@ public class QuizDAOImpl implements QuizDAO {
             //username,first,last,password,email,securityQ,securityA
             String sqlStr = "SELECT * FROM Quizzes";
             PreparedStatement quizStmt = DBConn.prepareStatement(sqlStr);
+            ResultSet quizRS = quizStmt.executeQuery();
+            
+            Quiz quiz;
+            while(quizRS.next()){
+                quiz = new Quiz();
+                
+                quiz.setQuizId(quizRS.getInt(1));
+                quiz.setAuthor(quizRS.getString(2));
+                quiz.setName(quizRS.getString(3));
+                
+                quizzes.add(quiz);
+            }
+            
+            DBConn.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        
+        return quizzes;
+    }
+
+    @Override
+    public ArrayList<Quiz> getAllProfQuizzes(String profUsername) {
+        try {
+            Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+            System.err.println(e.getMessage());
+            System.exit(0);
+        }   
+        
+        ArrayList<Quiz> quizzes = new ArrayList<>();
+        try {          
+            Connection DBConn = DriverManager.getConnection(connStr, user, password);
+
+            //username,first,last,password,email,securityQ,securityA
+            String sqlStr = "SELECT * FROM Quizzes WHERE profUsername=?";
+            PreparedStatement quizStmt = DBConn.prepareStatement(sqlStr);
+            quizStmt.setString(1, profUsername);
             ResultSet quizRS = quizStmt.executeQuery();
             
             Quiz quiz;

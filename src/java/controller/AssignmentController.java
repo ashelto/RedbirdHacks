@@ -9,8 +9,10 @@ import dao.QuizDAO;
 import dao.QuizDAOImpl;
 import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import model.Quiz;
+import model.User;
 
 /**
  *
@@ -21,7 +23,18 @@ import model.Quiz;
 public class AssignmentController {
     private ArrayList<Quiz> quizzes = new ArrayList<>();
     
+    @ManagedProperty(value="#{loginController.theModel}")
+    private User user;
+    
     public AssignmentController() {
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public ArrayList<Quiz> getQuizzes() {
@@ -35,6 +48,11 @@ public class AssignmentController {
     public void loadQuizzes() {
         QuizDAO quizDAO = new QuizDAOImpl();
         quizzes = quizDAO.getAllQuizzes();
+    }
+    
+    public void loadProfQuizzes() {
+        QuizDAO quizDAO = new QuizDAOImpl();
+        quizzes = quizDAO.getAllProfQuizzes(user.getUsername());
     }
     
     public String redirect() {

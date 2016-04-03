@@ -27,7 +27,7 @@ public class QuestionDAOImpl implements QuestionDAO {
     String password = "alpine102";
 
     @Override
-    public int createQuestion(Question aQuestion) {
+    public int createQuestion(Question aQuestion, int quizId) {
          try {
             Class.forName(driverName);
         } catch (ClassNotFoundException e) {
@@ -40,12 +40,13 @@ public class QuestionDAOImpl implements QuestionDAO {
             Connection DBConn = DriverManager.getConnection(connStr, user, password);
 
             //username,first,last,password,email,securityQ,securityA
-            String sqlStr = "INSERT INTO testQuestions (questionId, question, questionType, possibleAnswers, correctAnswer)"
-                    + "VALUES (?,?,?,?,?,?)";
+            String sqlStr = "INSERT INTO Questions (questionText, questionType, questionTopic, quizId)"
+                    + "VALUES (?,?,?,?)";
             PreparedStatement stmt = DBConn.prepareStatement(sqlStr);
-            stmt.setInt(1, aQuestion.getQuestionId());
-            stmt.setString(2, aQuestion.getQuestion());
-            stmt.setString(3, aQuestion.getQuestionType());
+            stmt.setString(1, aQuestion.getQuestionText());
+            stmt.setString(2, aQuestion.getQuestionType());
+            stmt.setString(3, aQuestion.getQuestionTopic());
+            stmt.setInt(4, quizId );
             //stmt.setString(4, aQuestion.getPossibleAnswers()); // having these two commented out will cause errors!
             //stmt.setString(5, aQuestion.getCorrectAnswer());
 

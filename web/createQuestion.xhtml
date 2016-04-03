@@ -8,17 +8,25 @@
         <title>Sign-up</title>
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
         <link href="signin.css" rel="stylesheet"></link>
+        <f:metadata>
+            <f:viewParam name="quizid" value="#{questionController.quizModel.quizId}"></f:viewParam>
+        </f:metadata>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
+        
+        <f:event listener="#{questionController.prerenderSetup()}" type="preRenderView"/>
         <div class ="container">
+            Hello, <h:outputText id="user-name" class="create-question" value="#{loginController.theModel.firstName}"/><br/>
             <h:form class = "create-question">
-                type <br/><h:selectOneMenu id="type" class="form-control newclass" value="#{questionController.question.questionType}" onchange ="myFunction(this)"  required="true">
+                Please enter question topic <h:inputText id="question-topic" value ="#{questionController.question.questionTopic}"/><br/>
+                Please select question type <br/><h:selectOneMenu id="type" class="form-control newclass" value="#{questionController.question.questionType}" onchange ="myFunction(this)"  required="true">
                     <f:selectItems value="#{questionController.type}"/>
-                    <f:ajax event="change" render = "create-fill createtf create-short create-mc" />
                 </h:selectOneMenu><br/>
                 <h:outputText id="mc-question-text" class ="mc" value="Please enter question: &lt;br/&gt;" style="color:#ff0000; display:none" escape= "false"/>
                 
-                <h:inputText id="mc-question" class ="mc" value="#{questionController.question.question}" style="color:#ff0000; display:none"/>
+                <h:inputText id="mc-question" class ="mc" value="#{questionController.question.questionText}" style="color:#ff0000; display:none"/>
                 
                 <h:outputText id="test10" class ="mc" value="&lt;br/&gt; " style="color:#ff0000; display:none" escape= "false"/>
                 
@@ -34,7 +42,7 @@
                 <h:outputText id="test13" class ="mc" value="&lt;br/&gt; " style="color:#ff0000; display:none" escape= "false"/>
                 <h:outputText id="mc-correct-textt" class ="mc" value="Correct Answer" style="color:#ff0000; display:none"  escape= "false"/>
                 <h:outputText id="test12" class ="mc" value="&lt;br/&gt; " style="color:#ff0000; display:none" escape= "false"/>
-                <h:selectOneMenu class ="mc-select" value="#{questionController.question.correctAnswer}" style="display:none">
+                <h:selectOneMenu class ="mc-select" value="answer" style="display:none">
                 <f:selectItem  class = "mc" itemValue="A" itemLabel="A" />
                 <f:selectItem  class = "mc" itemValue="B" itemLabel="B" />
                 <f:selectItem  class = "mc" itemValue="C" itemLabel="C" />
@@ -45,12 +53,12 @@
                 <h:outputText id="tf-text" class ="tf" value="Please enter questison: " style="color:#ff0000; display:none"/>
                 
                 <h:outputText id="test6" class ="tf" value="&lt;br/&gt; " style="color:#ff0000; display:none" escape= "false"/>
-                <h:inputText id="tf-question" class ="tf" value="#{questionController.question.question}" style="color:#ff0000; display:none"/>
+                <h:inputText id="tf-question" class ="tf" value="#{questionController.question.questionText}" style="color:#ff0000; display:none"/>
                 
                 <h:outputText id="test9" class ="tf" value="&lt;br/&gt; " style="color:#ff0000; display:none" escape= "false"/>
                 <h:outputText id="test7" class ="tf" value="&lt;br/&gt; " style="color:#ff0000; display:none" escape= "false"/>
                 <h:outputText id="tf-answer-text" class ="tf" value="Correct answer: " style="color:#ff0000; display:none" escape= "false"/>
-               <h:selectOneMenu class ="tf" value="#{questionController.question.correctAnswer}" style="display:none">
+               <h:selectOneMenu class ="tf" value="answer" style="display:none">
                 <f:selectItem  class = "tf" itemValue="true" itemLabel="True" />
                 <f:selectItem  class = "tf" itemValue="false" itemLabel="False" />
                 </h:selectOneMenu>
@@ -59,14 +67,16 @@
                 
                 
                 <h:outputText id="fill-question-text" class ="fill" value="Please Enter Question: " style="color:#ff0000; display:none"/>
-                <h:inputText id="fill" class ="fill" value="#{questionController.question.question}" style="color:#ff0000; display:none"/><br/>
+                <h:inputText id="fill" class ="fill" value="#{questionController.question.questionText}" style="color:#ff0000; display:none"/><br/>
                 <h:outputText id="fill-answer-text" class ="fill" value="Please Enter Correct Answer " style="color:#ff0000; display:none"/>
-                <h:inputText id="fill-answer" class ="fill" value="#{questionController.question.correctAnswer}" style="color:#ff0000; display:none"/>
+                <h:inputText id="fill-answer" class ="fill" value="answer" style="color:#ff0000; display:none"/>
                 
                 
                 <h:outputText id="select" class ="select" value="Please select a question" style="color:#ff0000; display:none"/>
+                <h:commandButton id="back" value="Back" class="btn btn-warning btn-block" action="#{questionController.createQuestion()}"/>
                 </h:form>
         </div>
+        
     </h:body>
     <script>
         function myFunction(form)

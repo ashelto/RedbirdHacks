@@ -17,10 +17,19 @@ import model.Quiz;
 @ManagedBean
 public class EditQuizController {
     private Quiz quiz;
+    private int quizid;
     
     public EditQuizController() {
         //QuizDAO quizDAO = new QuizDAOImpl();
         //this.quiz = quizDAO.getQuizByID(8);        
+    }
+
+    public int getQuizid() {
+        return quizid;
+    }
+
+    public void setQuizid(int quizid) {
+        this.quizid = quizid;
     }
 
     public Quiz getQuiz() {
@@ -33,6 +42,6 @@ public class EditQuizController {
     
     public void test() {
         QuizDAO quizDAO = new QuizDAOImpl();
-        this.quiz = quizDAO.getQuizByID(8);
+        this.quiz = quizDAO.getQuizByID(quizid);
     }
 }
