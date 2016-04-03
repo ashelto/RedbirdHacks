@@ -95,7 +95,7 @@ public class QuizDAOImpl implements QuizDAO {
                 while (questionRS.next()) {
                     question = new Question();
                     question.setQuestionId(questionRS.getInt(1));
-                    question.setQuestionText(questionRS.getString(2));
+                    question.setQuestion(questionRS.getString(2));
                     question.setQuestionType(questionRS.getString(3));
                     answerStmt = DBConn.prepareStatement("SELECT * FROM Answers where questionID=?");
                     answerStmt.setInt(1, question.getQuestionId());

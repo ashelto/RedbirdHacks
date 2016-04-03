@@ -54,7 +54,7 @@
                 <p:panelGrid columns="2">            
                     <ui:repeat value="#{assignmentController.quizzes}" var="quiz">
                         <h:outputText value="Edit Quiz #{quiz.name} - "/>
-                        <h:link class="btn btn-warning" value="Add Questions" outcome="/createQuestion.xhtml?quizid=#{quiz.quizId}"/><br/>
+                        <h:link class="btn btn-warning" value="Add Questions" outcome="/editquiz.xhtml?quizid=#{quiz.quizId}"/><br/>
                     </ui:repeat> 
                 </p:panelGrid>
             </h:form>

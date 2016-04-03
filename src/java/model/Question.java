@@ -14,13 +14,21 @@ import java.util.ArrayList;
 public class Question 
 {
     private int questionId;
-    private String questionTopic;
+    private String question;
     private String questionType;
-    private String questionText;
+    private ArrayList<Answer> answers = new ArrayList<Answer>();
 
     public Question() {
     }
 
+    public ArrayList<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(ArrayList<Answer> answers) {
+        this.answers = answers;
+    }
+     
     /**
      * @return the questionId
      */
@@ -36,47 +44,30 @@ public class Question
     }
 
     /**
-     * @return the questionTopic
+     * @return the question
      */
-    public String getQuestionTopic() {
-        return questionTopic;
+    public String getQuestion() {
+        return question;
     }
 
     /**
-     * @param questionTopic the questionTopic to set
+     * @param question the question to set
      */
-    public void setQuestionTopic(String questionTopic) {
-        this.questionTopic = questionTopic;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
     /**
-     * @return the questionType
+     * @return the type
      */
     public String getQuestionType() {
         return questionType;
     }
 
     /**
-     * @param questionType the questionType to set
+     * @param type the type to set
      */
     public void setQuestionType(String questionType) {
         this.questionType = questionType;
-    }
-
-    /**
-     * @return the questionText
-     */
-    public String getQuestionText() {
-        return questionText;
-    }
-
-    /**
-     * @param questionText the questionText to set
-     */
-    public void setQuestionText(String questionText) {
-        this.questionText = questionText;
-    }
-    
-    
-
+    }    
 }

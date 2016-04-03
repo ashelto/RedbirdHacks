@@ -9,16 +9,14 @@
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
         <link href="signin.css" rel="stylesheet"></link>
         <f:metadata>
-            <f:viewParam name="quizid" value="#{questionController.quizModel.quizId}"></f:viewParam>
+            <f:viewParam name="quizid" value="#{takeQuizController.quizModel.quizId}"></f:viewParam>
         </f:metadata>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
-        
-        <f:event listener="#{questionController.prerenderSetup()}" type="preRenderView"/>
         <div class ="container">
-            Hello, <h:outputText id="user-name" class="create-question" value="#{loginController.theModel.firstName}"/><br/>
+            Hello, <h:outputText id="user-name" class="create-question" value="#{questionController.theModel.firstName}"/><br/>
             <h:form class = "create-question">
                 Please enter question topic <h:inputText id="question-topic" value ="#{questionController.question.questionTopic}"/><br/>
                 Please select question type <br/><h:selectOneMenu id="type" class="form-control newclass" value="#{questionController.question.questionType}" onchange ="myFunction(this)"  required="true">
@@ -73,10 +71,8 @@
                 
                 
                 <h:outputText id="select" class ="select" value="Please select a question" style="color:#ff0000; display:none"/>
-                <h:commandButton id="back" value="Back" class="btn btn-warning btn-block" action="#{questionController.createQuestion()}"/>
                 </h:form>
         </div>
-        
     </h:body>
     <script>
         function myFunction(form)
