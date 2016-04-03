@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <head>
+        <title>TODO supply a title</title>
+        <f:metadata>
+            <f:viewParam name="quizid" value="#{takeQuizController.quizModel.quizId}"></f:viewParam>
+        </f:metadata>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <f:event listener="#{takeQuizController.prerenderSetup()}" type="preRenderView"/>
+
+        <div><h:form>
+                <h:outputText value="Confirm you are ready to take quiz: #{takeQuizController.quizModel.name}"/><br/>
+                <h:commandButton value="Take Quiz" action="TODO"/>
+            </h:form></div>
+    </body>
+</html>
