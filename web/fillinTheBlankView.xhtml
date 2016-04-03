@@ -10,13 +10,12 @@
     <h:body>
         <div class ="container">
             <h:form class = "form-signin">
-                    <h:outputText value = "#{takeQuizController.getQuestion(takeQuizController.index)}"></h:outputText>
+                <h:outputText value = #{takeQuizController.questionModel.question}></h:outputText>
                 <br/>
-                <h:commandButton id = "ans1" value = "#{takeQuizController.getQuestion(takeQuizController.index).getAnswers().get(0)}"
-                                 actionListener="#{takeQuizController.commandClicked()}"
-                                 action = "#{takeQuizController.evaluateAnswer()}"></h:commandButton>
-                <h:commandButton value="Submit" class="btn btn-primary btn-block" id="submit" action="#{takeQuizController.generateIndex()}" />
-                <h:outputText value="#{takeQuizController.output}" style="color:#ff0000"/>
+                <h:inputText value = #{takeQuizController.userResponse}></h:inputText>
+                <h:outputText value="#{loginController.response}" style="color:#ff0000"/>
+                <h:commandButton value="Submit" class="btn btn-primary btn-block" 
+                                 id="submit" action="#{takeQuizController.nextQuestion()}" />
             </h:form>
         </div>
     </h:body>
