@@ -22,7 +22,7 @@ and open the template in the editor.
 
         <div><h:form>
                 <h:outputText value="Confirm you are ready to take quiz: #{takeQuizController.quizModel.name}"/><br/>
-                <h:commandButton value="Take Quiz" action="TODO"/>
+                <h:commandButton value="Take Quiz" action="#{takeQuizController.launchQuiz()}"></h:commandButton>
             </h:form></div>
     </body>
 </html>
