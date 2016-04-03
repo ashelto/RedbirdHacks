@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import model.Answer;
 import model.Question;
 import model.Quiz;
@@ -108,6 +109,43 @@ public class QuizDAOImpl implements QuizDAO {
 
         // if insert is successful, rowCount will be set to 1 (1 row inserted successfully). Else, insert failed.
         return quiz;
+    }
+
+    @Override
+    public ArrayList<Quiz> getAllQuizzes() {
+        try {
+            Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+            System.err.println(e.getMessage());
+            System.exit(0);
+        }   
+        
+        ArrayList<Quiz> quizzes = new ArrayList<>();
+        try {          
+            Connection DBConn = DriverManager.getConnection(connStr, user, password);
+
+            //username,first,last,password,email,securityQ,securityA
+            String sqlStr = "SELECT * FROM Quizzes";
+            PreparedStatement quizStmt = DBConn.prepareStatement(sqlStr);
+            ResultSet quizRS = quizStmt.executeQuery();
+            
+            Quiz quiz;
+            while(quizRS.next()){
+                quiz = new Quiz();
+                
+                quiz.setQuizId(quizRS.getInt(1));
+                quiz.setAuthor(quizRS.getString(2));
+                quiz.setName(quizRS.getString(3));
+                
+                quizzes.add(quiz);
+            }
+            
+            DBConn.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        
+        return quizzes;
     }
     
 }

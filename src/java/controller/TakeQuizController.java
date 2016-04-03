@@ -5,6 +5,8 @@
  */
 package controller;
 
+import dao.QuizDAO;
+import dao.QuizDAOImpl;
 import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -25,12 +27,9 @@ public class TakeQuizController {
      */
     Quiz quizModel;
     String userResponse;
-    private ArrayList <Question> questionSet;
-    private ArrayList <Answer> answers;
     
     public TakeQuizController() {
         quizModel = new Quiz();
-        questionSet = quizModel.getQuestionSet();
     }
 
     public Quiz getQuizModel() {
@@ -48,9 +47,27 @@ public class TakeQuizController {
     public void setUserResponse(String userResponse) {
         this.userResponse = userResponse;
     }
-//    public boolean validateAnswer()
-//    {
-//        boolean isCorrect;
-//        if()
-//    }
+    
+    public void prerenderSetup() {
+        QuizDAO quizDAO = new QuizDAOImpl();
+        quizModel = quizDAO.getQuizByID(quizModel.getQuizId());
+    }
+    
+    public String launchQuiz() {
+        String questionType = quizModel.getQuestionSet().get(0).getQuestionType();
+        if (questionType.equals("MC")) {
+            return "/multipleChoiceView.xhtml";
+        } else if (questionType.equals("TF")) {
+            return "/trueFalseView.xhtml";
+        } else if (questionType.equals("FITB")) {
+            return "fillinTheBlankView.xhtml"; 
+        } else {
+            System.out.println("ERROR: launchQuiz");
+        }
+        return "";
+    }
+    
+    public String nextQuestion() {
+        return null;
+    }
 }

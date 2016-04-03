@@ -34,6 +34,5 @@ public class EditQuizController {
     public void test() {
         QuizDAO quizDAO = new QuizDAOImpl();
         this.quiz = quizDAO.getQuizByID(8);
-        System.out.println(quiz.getQuestionSet().size());
     }
 }

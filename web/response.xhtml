@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <f:event listener="#{loginController.isAdmin}" type="preRenderView" />
     <h:head>
         <title>Login Success</title>
@@ -11,6 +12,7 @@
     </h:head>
 
     <h:body>
+        <f:event listener="#{assignmentController.loadQuizzes()}" type="preRenderView"/>
         <div class = "container"> 
             <p:panelGrid columns="1">
                 <f:facet name="header">
@@ -45,18 +47,11 @@
                 </div>
                 <br/>
                 <h3>Assignments</h3>
-                <p:panelGrid columns="2" layout="grid">            
-                    <h:outputText value="Content" /> 
-                    <h:outputText value="Content" /> 
-                    <h:outputText value="Content" /> 
-
-                    <h:outputText value="Content" /> 
-                    <h:outputText value="Content" /> 
-                    <h:outputText value="Content" /> 
-
-                    <h:outputText value="Content" /> 
-                    <h:outputText value="Content" /> 
-                    <h:outputText value="Content" /> 
+                <p:panelGrid columns="2">            
+                    <ui:repeat value="#{assignmentController.quizzes}" var="quiz">
+                        <h:outputText value="Take Quiz #{quiz.name} by #{quiz.author} - "/>
+                        <h:link class="btn btn-success" value="Take Quiz" outcome="/quizconfirm.xhtml?quizid=#{quiz.quizId}"/><br/>
+                    </ui:repeat>
                 </p:panelGrid>
             </h:form>
         </div>

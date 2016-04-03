@@ -15,9 +15,7 @@ public class Quiz
 {
     private int quizId;
     private String author;
-    private String name;
-    private String subject; 
-    private int questions; 
+    private String name; 
     private ArrayList <Question> questionSet = new ArrayList<Question>();
 
     public Quiz() {
@@ -45,22 +43,6 @@ public class Quiz
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public int getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(int questions) {
-        this.questions = questions;
     }
 
     public ArrayList<Question> getQuestionSet() {

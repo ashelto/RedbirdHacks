@@ -5,6 +5,7 @@
  */
 package dao;
 
+import java.util.ArrayList;
 import model.Quiz;
 
 /**
@@ -14,4 +15,5 @@ import model.Quiz;
 public interface QuizDAO {
     public int createQuiz(Quiz quiz);
     public Quiz getQuizByID(int quizID);
+    public ArrayList<Quiz> getAllQuizzes();
 }
